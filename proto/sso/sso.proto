@@ -18,10 +18,8 @@ service Auth {
 
 message SetAdminRequest {
   int64 user_id = 1; // User ID to set as an admin.
-  bool is_admin = 2; // Indicates whether the user should be an admin or not.
-  int32 app_id = 3; // ID of the app to set the user as an admin for.
-  int64 admin_id = 4; // ID of the admin setting the user as an admin.
-  string token = 5; // Auth token of the admin setting the user as an admin.
+  bool is_set_admin = 2; // Indicates whether the user should be set as an admin.
+  string token = 3; // Auth token of the admin setting the user as an admin.
 }
 
 message SetAdminResponse {
