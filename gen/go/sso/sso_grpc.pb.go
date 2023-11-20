@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -37,7 +36,7 @@ type AuthClient interface {
 	// IsAdmin checks whether a user is an admin.
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	// SetAdmin sets a user as an admin.
-	SetAdmin(ctx context.Context, in *SetAdminRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SetAdmin(ctx context.Context, in *SetAdminRequest, opts ...grpc.CallOption) (*SetAdminResponse, error)
 }
 
 type authClient struct {
@@ -75,8 +74,8 @@ func (c *authClient) IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...gr
 	return out, nil
 }
 
-func (c *authClient) SetAdmin(ctx context.Context, in *SetAdminRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *authClient) SetAdmin(ctx context.Context, in *SetAdminRequest, opts ...grpc.CallOption) (*SetAdminResponse, error) {
+	out := new(SetAdminResponse)
 	err := c.cc.Invoke(ctx, Auth_SetAdmin_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -95,7 +94,7 @@ type AuthServer interface {
 	// IsAdmin checks whether a user is an admin.
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	// SetAdmin sets a user as an admin.
-	SetAdmin(context.Context, *SetAdminRequest) (*emptypb.Empty, error)
+	SetAdmin(context.Context, *SetAdminRequest) (*SetAdminResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -112,7 +111,7 @@ func (UnimplementedAuthServer) Login(context.Context, *LoginRequest) (*LoginResp
 func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IsAdmin not implemented")
 }
-func (UnimplementedAuthServer) SetAdmin(context.Context, *SetAdminRequest) (*emptypb.Empty, error) {
+func (UnimplementedAuthServer) SetAdmin(context.Context, *SetAdminRequest) (*SetAdminResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetAdmin not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}

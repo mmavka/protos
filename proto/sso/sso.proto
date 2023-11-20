@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package auth;
-import "google/protobuf/empty.proto";
+//import "google/protobuf/empty.proto";
 
 option go_package = "mmavka.sso.v1;ssov1";
 
@@ -13,7 +13,7 @@ service Auth {
   // IsAdmin checks whether a user is an admin.
   rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);
   // SetAdmin sets a user as an admin.
-  rpc SetAdmin(SetAdminRequest) returns (google.protobuf.Empty);
+  rpc SetAdmin(SetAdminRequest) returns (SetAdminResponse);
 }
 
 message SetAdminRequest {
@@ -22,6 +22,10 @@ message SetAdminRequest {
   int32 app_id = 3; // ID of the app to set the user as an admin for.
   int64 admin_id = 4; // ID of the admin setting the user as an admin.
   string token = 5; // Auth token of the admin setting the user as an admin.
+}
+
+message SetAdminResponse {
+  bool is_admin = 1; // Indicates whether the user is an admin.
 }
 
 message IsAdminRequest {
